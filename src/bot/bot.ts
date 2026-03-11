@@ -89,6 +89,20 @@ const texts: Record<string, Record<string, string>> = {
     error: "😔 Etwas ist schiefgelaufen. Bitte versuche es erneut!",
     start_prompt: "Drücke den Knopf 🎯 Ziel setzen um zu beginnen!",
   },
+  fr: {
+    choose_lang: "Bonjour! 👋 Choisissez votre langue:",
+    welcome: "🇫🇷 Super! On parle français!",
+    intro:
+      "Je t'aiderai à atteindre n'importe quel objectif!\n\n1️⃣ Dis-moi ton objectif\n2️⃣ J'évalue ton niveau actuel\n3️⃣ Je crée un plan personnel\n4️⃣ Je te donne des tâches quotidiennes",
+    btn_goal: "🎯 Définir un objectif",
+    ask_goal: "🎯 Écris ton objectif",
+    goal_saved: "✅ Objectif enregistré!",
+    ask_timeframe: "✅ Compris! En combien de temps?",
+    thinking: "🧠 Analyse en cours...",
+    another_goal: "Tu veux définir un autre objectif?",
+    error: "😔 Une erreur est survenue. Réessaie!",
+    start_prompt: "Appuie sur 🎯 Définir un objectif pour commencer!",
+  },
   zh: {
     choose_lang: "你好！👋 请选择语言：",
     welcome: "🇨🇳 太棒了！我们用中文交流！",
@@ -124,14 +138,21 @@ bot.start((ctx) => {
     "🌍👋",
     Markup.keyboard([
       ["🇬🇧 English", "🇪🇸 Español", "🇩🇪 Deutsch"],
-      ["🇷🇺 Русский", "🇨🇳 中文"],
+      ["🇫🇷 Français", "🇷🇺 Русский", "🇨🇳 中文"],
     ]).resize(),
   );
 });
 
 // Выбор языка — обрабатываем три кнопки
 bot.hears(
-  ["🇷🇺 Русский", "🇬🇧 English", "🇪🇸 Español", "🇩🇪 Deutsch", "🇨🇳 中文"],
+  [
+    "🇷🇺 Русский",
+    "🇬🇧 English",
+    "🇪🇸 Español",
+    "🇩🇪 Deutsch",
+    "🇨🇳 中文",
+    "🇫🇷 Français",
+  ],
   (ctx) => {
     // Определяем язык по нажатой кнопке
     const langMap: Record<string, string> = {
@@ -140,6 +161,7 @@ bot.hears(
       "🇪🇸 Español": "es",
       "🇩🇪 Deutsch": "de",
       "🇨🇳 中文": "zh",
+      "🇫🇷 Français": "fr",
     };
     const lang = langMap[ctx.message.text];
 
@@ -163,6 +185,7 @@ bot.hears(
     "🎯 Establecer objetivo",
     "🎯 Ziel setzen",
     "🎯 设定目标",
+    "🎯 Définir un objectif",
   ],
   (ctx) => {
     const state = userStates.get(ctx.from.id);

@@ -19,9 +19,11 @@ export async function analyzeGoal(userGoal: UserGoal): Promise<string> {
           ? "Responde en español."
           : userGoal.lang === "de"
             ? "Antworte auf Deutsch."
-            : userGoal.lang === "zh"
-              ? "请用中文回答。"
-              : "Reply in English.";
+            : userGoal.lang === "fr"
+              ? "On parle français."
+              : userGoal.lang === "zh"
+                ? "请用中文回答。"
+                : "Reply in English.";
 
   const headers: Record<string, Record<string, string>> = {
     ru: {
@@ -51,6 +53,13 @@ export async function analyzeGoal(userGoal: UserGoal): Promise<string> {
       month: "Monat",
       deadlines: "⏰ ZEITPLAN",
       tasks: "✅ AUFGABEN FÜR HEUTE",
+    },
+    fr: {
+      assessment: "📊 ÉVALUATION",
+      plan: "🗓 PLAN PAR ÉTAPES",
+      month: "Mois",
+      deadlines: "⏰ CALENDRIER",
+      tasks: "✅ TÂCHES DU JOUR",
     },
     zh: {
       assessment: "📊 目标评估",
